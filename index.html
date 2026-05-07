@@ -20,10 +20,6 @@
             padding: 2rem;
             position: relative;
             overflow-x: hidden;
-        }
-
-        /* Анимированный градиент фона (переливание) */
-        body {
             background: linear-gradient(135deg, #ffe5d9, #e0c9b6, #b5a898, #8f8f8f);
             background-size: 400% 400%;
             animation: gradientFlow 18s ease infinite;
@@ -35,7 +31,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Лучи на фоне (поверх градиента, под карточкой) */
         body::before {
             content: '';
             position: fixed;
@@ -47,8 +42,7 @@
             pointer-events: none;
             z-index: 1;
         }
-        
-        /* Canvas для частиц (дождь) */
+
         #particleCanvas {
             position: fixed;
             top: 0;
@@ -59,7 +53,6 @@
             z-index: 2;
         }
 
-        /* Основная карточка */
         .card {
             max-width: 560px;
             width: 100%;
@@ -79,7 +72,6 @@
             box-shadow: 0 30px 55px -15px rgba(0, 0, 0, 0.6);
         }
 
-        /* Аватар */
         .avatar-wrapper {
             width: 140px;
             height: 140px;
@@ -117,7 +109,11 @@
             box-shadow: 0 0 0 4px rgba(255, 220, 180, 0.7);
         }
 
-        /* Имя */
+        /* Имя и описание в столбик */
+        .title-block {
+            margin-bottom: 2rem;
+        }
+        
         h1 {
             font-size: 3.1rem;
             font-weight: 800;
@@ -126,10 +122,8 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             transition: all 0.2s;
-            display: inline-block;
-            padding: 0 0.2rem;
         }
         
         h1:hover {
@@ -141,7 +135,6 @@
             transform: scale(1.02);
         }
 
-        /* About me под ником */
         .about {
             font-size: 1rem;
             font-weight: 450;
@@ -151,7 +144,6 @@
             padding: 0.3rem 1.2rem;
             border-radius: 40px;
             backdrop-filter: blur(4px);
-            margin-bottom: 2rem;
             transition: all 0.25s;
             cursor: default;
         }
@@ -163,7 +155,23 @@
             transform: scale(1.02);
         }
 
-        /* Секция ссылок */
+        /* Адаптив для телефонов */
+        @media (max-width: 520px) {
+            .card {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 2.4rem;
+            }
+            .avatar-wrapper {
+                width: 110px;
+                height: 110px;
+            }
+            .about {
+                font-size: 0.85rem;
+            }
+        }
+
         .links {
             display: flex;
             flex-direction: column;
@@ -203,7 +211,6 @@
             border-color: #ffddbb;
         }
         
-        /* Контакты */
         .contact-info {
             display: flex;
             flex-wrap: wrap;
@@ -246,18 +253,10 @@
             margin-right: auto;
         }
 
-        /* Адаптив */
-        @media (max-width: 520px) {
-            .card {
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 2.4rem;
-            }
-            .avatar-wrapper {
-                width: 110px;
-                height: 110px;
-            }
+        .footer-text {
+            font-size: 0.7rem;
+            margin-top: 1rem;
+            color: rgba(255,240,220,0.7);
         }
     </style>
 </head>
@@ -268,8 +267,10 @@
             <img class="avatar" src="IMG_2973.PNG" alt="RLXM avatar" id="avatarImage" onerror="this.onerror=null; this.src='https://placehold.co/400x400/ffe5d9/8f8f8f?text=RLXM'">
         </div>
         
-        <h1>RLXM</h1>
-        <div class="about">music producer since 2021</div>
+        <div class="title-block">
+            <h1>RLXM</h1>
+            <div class="about">music producer since 2021</div>
+        </div>
         
         <div class="links">
             <div class="social-links">
@@ -284,7 +285,7 @@
             <span>💬 Discord: rlxm_contact</span>
         </div>
         <hr />
-        <div style="font-size: 0.7rem; margin-top: 1rem; color: rgba(255,240,220,0.7);">
+        <div class="footer-text">
             🧁 crunchy music, smooth waves
         </div>
     </div>
@@ -330,7 +331,6 @@
                     ctx.drawImage(particleImg, p.x - p.size/2, p.y - p.size/2, p.size, p.size);
                     ctx.restore();
                     
-                    // обновление позиции (дождь)
                     p.y += p.speedY;
                     if (p.y > height + p.size) {
                         p.y = -p.size;
