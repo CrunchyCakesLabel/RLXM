@@ -13,16 +13,29 @@
 
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: radial-gradient(circle at 30% 10%, #ffe5d9, #8f8f8f);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Лучи на фоне */
+        /* Анимированный градиент фона (переливание) */
+        body {
+            background: linear-gradient(135deg, #ffe5d9, #e0c9b6, #b5a898, #8f8f8f);
+            background-size: 400% 400%;
+            animation: gradientFlow 18s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Лучи на фоне (поверх градиента, под карточкой) */
         body::before {
             content: '';
             position: fixed;
@@ -32,9 +45,20 @@
             bottom: 0;
             background: repeating-conic-gradient(from 0deg, rgba(255,245,235,0.2) 0deg, rgba(255,245,235,0) 15deg, rgba(255,235,220,0.15) 30deg);
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
         }
         
+        /* Canvas для частиц (дождь) */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
         /* Основная карточка */
         .card {
             max-width: 560px;
@@ -45,8 +69,9 @@
             padding: 2rem 2rem 2.5rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
             transition: all 0.4s ease;
-            z-index: 2;
+            z-index: 3;
             text-align: center;
+            position: relative;
         }
         
         .card:hover {
@@ -92,7 +117,7 @@
             box-shadow: 0 0 0 4px rgba(255, 220, 180, 0.7);
         }
 
-        /* Имя + эффект заливки при наведении */
+        /* Имя */
         h1 {
             font-size: 3.1rem;
             font-weight: 800;
@@ -116,7 +141,7 @@
             transform: scale(1.02);
         }
 
-        /* About me — тоже реагирует */
+        /* About me под ником */
         .about {
             font-size: 1rem;
             font-weight: 450;
@@ -237,9 +262,10 @@
     </style>
 </head>
 <body>
+    <canvas id="particleCanvas"></canvas>
     <div class="card">
         <div class="avatar-wrapper">
-            <img class="avatar" src="IMG_2973.PNG" alt="RLXM avatar" onerror="this.onerror=null; this.src='https://placehold.co/400x400/ffe5d9/8f8f8f?text=RLXM'">
+            <img class="avatar" src="IMG_2973.PNG" alt="RLXM avatar" id="avatarImage" onerror="this.onerror=null; this.src='https://placehold.co/400x400/ffe5d9/8f8f8f?text=RLXM'">
         </div>
         
         <h1>RLXM</h1>
@@ -262,5 +288,80 @@
             🧁 crunchy music, smooth waves
         </div>
     </div>
+
+    <script>
+        (function() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            const avatarImg = document.getElementById('avatarImage');
+            let particles = [];
+            let particleImg = null;
+            let animationId = null;
+            let width, height;
+
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            function createParticles() {
+                const count = 110;
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        size: 6 + Math.random() * 14,
+                        speedY: 0.8 + Math.random() * 1.5,
+                        opacity: 0.3 + Math.random() * 0.5
+                    });
+                }
+            }
+
+            function drawParticles() {
+                if (!ctx || !particleImg) return;
+                ctx.clearRect(0, 0, width, height);
+                
+                for (let p of particles) {
+                    ctx.save();
+                    ctx.globalAlpha = p.opacity;
+                    ctx.drawImage(particleImg, p.x - p.size/2, p.y - p.size/2, p.size, p.size);
+                    ctx.restore();
+                    
+                    // обновление позиции (дождь)
+                    p.y += p.speedY;
+                    if (p.y > height + p.size) {
+                        p.y = -p.size;
+                        p.x = Math.random() * width;
+                    }
+                }
+                animationId = requestAnimationFrame(drawParticles);
+            }
+
+            function initParticleRain() {
+                if (avatarImg.complete && avatarImg.naturalWidth !== 0) {
+                    particleImg = avatarImg;
+                    resizeCanvas();
+                    createParticles();
+                    drawParticles();
+                } else {
+                    avatarImg.onload = () => {
+                        particleImg = avatarImg;
+                        resizeCanvas();
+                        createParticles();
+                        drawParticles();
+                    };
+                }
+                window.addEventListener('resize', () => {
+                    resizeCanvas();
+                    createParticles();
+                });
+            }
+
+            initParticleRain();
+        })();
+    </script>
 </body>
 </html>
