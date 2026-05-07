@@ -19,6 +19,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            position: relative;
         }
 
         /* Лучи на фоне */
@@ -38,7 +39,7 @@
         .card {
             max-width: 560px;
             width: 100%;
-            background: rgba(20, 20, 22, 0.75);
+            background: rgba(20, 20, 22, 0.65);
             backdrop-filter: blur(12px);
             border-radius: 56px;
             padding: 2rem 2rem 2.5rem;
@@ -49,11 +50,11 @@
         }
         
         .card:hover {
-            background: rgba(20, 20, 22, 0.82);
+            background: rgba(20, 20, 22, 0.75);
             box-shadow: 0 30px 55px -15px rgba(0, 0, 0, 0.6);
         }
 
-        /* Аватар (закругленный квадрат + размытое свечение по краям) */
+        /* Аватар */
         .avatar-wrapper {
             width: 140px;
             height: 140px;
@@ -73,7 +74,6 @@
             z-index: 2;
         }
         
-        /* Свечение вокруг авы (размытие, как ты просил) */
         .avatar-wrapper::before {
             content: '';
             position: absolute;
@@ -92,7 +92,7 @@
             box-shadow: 0 0 0 4px rgba(255, 220, 180, 0.7);
         }
 
-        /* Имя */
+        /* Имя + эффект заливки при наведении */
         h1 {
             font-size: 3.1rem;
             font-weight: 800;
@@ -103,28 +103,41 @@
             color: transparent;
             margin-bottom: 0.5rem;
             transition: all 0.2s;
+            display: inline-block;
+            padding: 0 0.2rem;
         }
         
-        /* Подпись */
+        h1:hover {
+            background: linear-gradient(135deg, #ffc8a2, #ffb07c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(255, 160, 100, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* About me — тоже реагирует */
         .about {
             font-size: 1rem;
             font-weight: 450;
             color: #dedede;
             background: rgba(0, 0, 0, 0.3);
             display: inline-block;
-            padding: 0.3rem 1rem;
+            padding: 0.3rem 1.2rem;
             border-radius: 40px;
             backdrop-filter: blur(4px);
             margin-bottom: 2rem;
-            transition: all 0.2s;
+            transition: all 0.25s;
+            cursor: default;
         }
         
-        /* Each element gets a nice hover glow */
-        h1:hover, .about:hover, .social-links a:hover, .contact-info span:hover {
-            filter: drop-shadow(0 0 8px rgba(255,215,180,0.7));
-            transition: 0.2s;
+        .about:hover {
+            background: rgba(255, 160, 100, 0.3);
+            color: #fff0e0;
+            box-shadow: 0 0 8px rgba(255, 160, 100, 0.6);
+            transform: scale(1.02);
         }
-        
+
         /* Секция ссылок */
         .links {
             display: flex;
@@ -142,7 +155,7 @@
         }
         
         .social-links a {
-            background: rgba(35, 35, 42, 0.8);
+            background: rgba(35, 35, 42, 0.7);
             backdrop-filter: blur(4px);
             padding: 0.6rem 1.3rem;
             border-radius: 60px;
@@ -150,7 +163,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
-            transition: 0.2s;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -158,18 +171,19 @@
         }
         
         .social-links a:hover {
-            background: rgba(70, 70, 90, 0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 0 12px rgba(255,190,130,0.5);
-            border-color: rgba(255,210,150,0.6);
+            background: #ffaa77;
+            color: #1a1a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 0 12px rgba(255, 140, 70, 0.8);
+            border-color: #ffddbb;
         }
         
-        /* Контакты (email, discord username) */
+        /* Контакты */
         .contact-info {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1.2rem;
             padding-top: 0.8rem;
             border-top: 1px solid rgba(255,255,220,0.2);
             font-size: 0.9rem;
@@ -180,16 +194,23 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.35);
             padding: 0.3rem 1rem;
             border-radius: 48px;
-            transition: 0.2s;
+            transition: all 0.2s;
             cursor: default;
         }
         
         .contact-info span:hover {
-            background: rgba(70,70,90,0.7);
-            box-shadow: 0 0 8px rgba(255,180,100,0.6);
+            background: rgba(255, 140, 70, 0.6);
+            color: white;
+            box-shadow: 0 0 12px rgba(255, 120, 50, 0.5);
+            transform: scale(1.02);
+        }
+        
+        .contact-info a {
+            color: inherit;
+            text-decoration: none;
         }
 
         hr {
@@ -199,7 +220,8 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
+        /* Адаптив */
         @media (max-width: 520px) {
             .card {
                 padding: 1.5rem;
@@ -217,7 +239,6 @@
 <body>
     <div class="card">
         <div class="avatar-wrapper">
-            <!-- !!! ВАЖНО !!! ЗАМЕНИ ССЫЛКУ НИЖЕ НА РАБОЧУЮ ССЫЛКУ НА АВАТАРКУ -->
             <img class="avatar" src="IMG_2973.PNG" alt="RLXM avatar" onerror="this.onerror=null; this.src='https://placehold.co/400x400/ffe5d9/8f8f8f?text=RLXM'">
         </div>
         
@@ -233,11 +254,11 @@
         </div>
         
         <div class="contact-info">
-            <span>✉️ <a href="mailto:rlxm033@gmail.com" style="color:inherit; text-decoration:none;">rlxm033@gmail.com</a></span>
+            <span>✉️ <a href="mailto:rlxm033@gmail.com">rlxm033@gmail.com</a></span>
             <span>💬 Discord: rlxm_contact</span>
         </div>
         <hr />
-        <div style="font-size: 0.7rem; margin-top: 1rem; color: rgba(255,240,220,0.6);">
+        <div style="font-size: 0.7rem; margin-top: 1rem; color: rgba(255,240,220,0.7);">
             🧁 crunchy music, smooth waves
         </div>
     </div>
