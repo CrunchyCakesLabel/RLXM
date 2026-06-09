@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RLXM — музыка, карусель релизов</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>RLXM — Brazilian Funk / Phonk</title>
     <style>
         * {
             margin: 0;
@@ -12,241 +12,350 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: #0b0b12;
-            color: #ededf0;
-            padding: 2rem 1rem;
+            background: #0a0a0f;
+            color: #eaeef5;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            line-height: 1.4;
+            padding: 2rem 1.5rem;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         /* шапка */
-        .header {
+        .hero {
             text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .avatar {
-            width: 130px;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 30px;
-            box-shadow: 0 0 0 3px rgba(220, 180, 255, 0.4);
-            margin-bottom: 1rem;
+            margin-bottom: 4rem;
         }
 
         h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #f5f0ff, #b9a5ff);
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #f0eaff, #c6b2ff);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
+            margin-bottom: 0.5rem;
         }
 
-        .sub {
-            color: #a9a9c5;
-            margin-top: 0.5rem;
+        .genre-tag {
+            color: #a7a3c7;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border-top: 1px solid #2a2a38;
+            border-bottom: 1px solid #2a2a38;
+            display: inline-block;
+            padding: 0.3rem 1rem;
         }
 
-        /* карусель */
-        .carousel {
-            position: relative;
-            margin: 2rem 0;
+        /* LATEST DROP секция */
+        .latest-drop {
+            background: #101016;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid #252530;
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.5);
         }
 
-        .carousel-track {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            padding: 1rem 0.2rem 2rem;
+        .latest-label {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: #a594d0;
+            margin-bottom: 1rem;
         }
 
-        .carousel-track::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .carousel-track::-webkit-scrollbar-thumb {
-            background: #4a3b6e;
-            border-radius: 10px;
-        }
-
-        .release-card {
-            flex: 0 0 220px;
-            background: #12121c;
-            border-radius: 1.5rem;
-            border: 1px solid #2a2a38;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .release-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.5);
-            border-color: #7f6bb3;
-        }
-
-        .card-cover {
+        .latest-cover {
+            width: 220px;
             height: 220px;
-            background: #1e1e2a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 0 auto 1rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        .card-cover img {
+        .latest-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .card-info {
-            padding: 0.8rem;
-        }
-
-        .card-artist {
-            font-size: 0.8rem;
-            color: #b9b3d6;
-        }
-
-        .card-title {
+        .latest-title {
+            font-size: 1.5rem;
             font-weight: 700;
-            margin: 0.3rem 0;
+            margin: 0.8rem 0 0.3rem;
+        }
+
+        .listen-btn {
+            display: inline-block;
+            background: #2c283f;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            margin-top: 1rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            border: 1px solid #5e4f8b;
+        }
+
+        .listen-btn:hover {
+            background: #4a3b73;
+            transform: scale(1.02);
+        }
+
+        /* THE VISION */
+        .vision {
+            margin: 3rem 0;
+            text-align: center;
+            border-left: 3px solid #5f4a9e;
+            padding: 1rem 1.5rem;
+            background: #0c0c12;
+            border-radius: 1.5rem;
+        }
+
+        .vision h3 {
+            font-weight: 500;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            color: #b7a8e0;
+            margin-bottom: 0.5rem;
+        }
+
+        .vision p {
+            color: #cbcbe6;
+            max-width: 550px;
+            margin: 0 auto;
             font-size: 0.95rem;
         }
 
-        .card-date {
-            font-size: 0.7rem;
-            color: #7b7b9a;
+        /* карусель релизов */
+        .carousel-section {
+            margin: 3rem 0;
         }
 
+        .carousel-title {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1.2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 1rem 0.3rem 1.5rem;
+            scrollbar-width: thin;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            height: 5px;
+        }
+        .carousel-track::-webkit-scrollbar-thumb {
+            background: #4c3b72;
+            border-radius: 10px;
+        }
+
+        .release-card {
+            flex: 0 0 180px;
+            background: #111118;
+            border-radius: 1.2rem;
+            border: 1px solid #292936;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+        .release-card:hover {
+            border-color: #8f78cf;
+            transform: translateY(-5px);
+        }
+        .card-cover {
+            height: 180px;
+            background: #1b1b24;
+        }
+        .card-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-info {
+            padding: 0.5rem 0.7rem 0.8rem;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         .card-link {
-            display: inline-block;
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-            color: #d0bdf4;
+            font-size: 0.7rem;
+            color: #b2a1db;
             text-decoration: none;
         }
 
-        .card-link:hover {
-            text-decoration: underline;
-        }
-
         .carousel-btn {
-            position: absolute;
-            top: 45%;
-            background: #1f1f2c;
+            background: #1a1a24;
             border: none;
             color: white;
             font-size: 1.8rem;
             cursor: pointer;
-            padding: 0.3rem 0.8rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 40px;
-            transform: translateY(-50%);
-            z-index: 2;
-            opacity: 0.6;
             transition: 0.2s;
         }
-
         .carousel-btn:hover {
-            opacity: 1;
-            background: #35334a;
+            background: #3c3162;
         }
 
-        .btn-left {
-            left: -10px;
-        }
-
-        .btn-right {
-            right: -10px;
-        }
-
-        .footer {
+        /* connect */
+        .connect {
+            margin: 4rem 0 2rem;
             text-align: center;
-            margin-top: 3rem;
-            font-size: 0.75rem;
-            color: #5e5e79;
+            border-top: 1px solid #222230;
+            padding-top: 2rem;
+        }
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .links a {
+            background: #13131c;
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            color: #d3cef5;
+            text-decoration: none;
+            font-size: 0.85rem;
+            border: 1px solid #2e2a41;
+            transition: 0.2s;
+        }
+        .links a:hover {
+            background: #2f2850;
+            border-color: #8a73ca;
         }
 
-        @media (max-width: 700px) {
-            .carousel-btn {
-                display: none;
-            }
-            .release-card {
-                flex: 0 0 180px;
-            }
-            .card-cover {
-                height: 180px;
-            }
+        @media (max-width: 650px) {
+            h1 { font-size: 2.8rem; }
+            .latest-cover { width: 160px; height: 160px; }
+            .release-card { flex: 0 0 150px; }
+            .card-cover { height: 150px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <img src="IMG_2973.PNG" alt="RLXM avatar" class="avatar" onerror="this.src='https://placehold.co/400x400/2a2a3a/ccc?text=RLXM'">
+    <div class="hero">
         <h1>RLXM</h1>
-        <div class="sub">music producer · brazilian funk · phonk</div>
+        <div class="genre-tag">BRAZILIAN FUNK / PHONK / PRODUCER</div>
     </div>
 
-    <div class="carousel">
-        <button class="carousel-btn btn-left" id="scrollLeft">←</button>
-        <div class="carousel-track" id="releaseTrack">
-            <div style="width: 100%; text-align: center; padding: 2rem;">Загрузка релизов...</div>
+    <!-- LATEST DROP будет заполнен автоматически из таблицы -->
+    <div id="latestDropContainer" class="latest-drop">
+        <div class="latest-label">LATEST DROP</div>
+        <div style="text-align:center; padding: 2rem;">Загрузка...</div>
+    </div>
+
+    <!-- THE VISION -->
+    <div class="vision">
+        <h3>THE VISION</h3>
+        <p>RLXM — независимый продюсер из России. Тяжёлые басы, мрачные мелодии, бразильский фанк и фонк.</p>
+    </div>
+
+    <!-- Карусель всех релизов -->
+    <div class="carousel-section">
+        <div class="carousel-title">📀 ALL RELEASES</div>
+        <div class="carousel-wrapper">
+            <button class="carousel-btn" id="scrollLeft">←</button>
+            <div class="carousel-track" id="releaseTrack">
+                <div style="width:100%; text-align:center; padding: 1rem;">Загрузка релизов...</div>
+            </div>
+            <button class="carousel-btn" id="scrollRight">→</button>
         </div>
-        <button class="carousel-btn btn-right" id="scrollRight">→</button>
     </div>
 
-    <div class="footer">
-        🧁 crunchy music, smooth waves · обновляется автоматически
+    <!-- CONNECT -->
+    <div class="connect">
+        <div style="font-weight: 300; letter-spacing: 2px;">CONNECT</div>
+        <div class="links">
+            <a href="https://www.youtube.com/@RLXMbeats" target="_blank">YouTube</a>
+            <a href="https://open.spotify.com/artist/67jR1Ghp8nlWrFVgLox3m8?si=aJSXBqFgRmK_wWturd-okQ" target="_blank">Spotify</a>
+            <a href="http://instagram.com/rlxmofc/" target="_blank">Instagram</a>
+            <a href="https://discord.gg/DEZqjN4SRq" target="_blank">Discord</a>
+        </div>
+        <div style="font-size: 0.7rem; margin-top: 1.5rem; color:#6f6b8d;">🧁 crunchy music, smooth waves</div>
     </div>
 </div>
 
 <script>
-    // ⬇️ ЗАМЕНИ НА СВОЙ ID ТАБЛИЦЫ ⬇️
-    const SHEET_ID = '1A2B3C4D5E6F7G8H9I0J';  // ← сюда вставь ID своей Google таблицы
+    // ⬇️⬇️⬇️ ЗАМЕНИ ЭТОТ ID НА ID ТВОЕЙ GOOGLE ТАБЛИЦЫ ⬇️⬇️⬇️
+    const SHEET_ID = '1WboG1VqhwMkr6kG8PV3dKzOyB8371K9F6UNsK8YLOrg';   // пример: '1A2B3cD4eF5gH6iJ7kL8mN9oP'
     const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
 
-    async function loadReleases() {
+    async function fetchReleases() {
         try {
-            const response = await fetch(CSV_URL);
-            const csvText = await response.text();
-            const rows = csvText.split('\n').slice(1); // пропускаем заголовок
-            const releases = rows
-                .filter(row => row.trim() !== '')
-                .map(row => {
-                    const [title, artist, cover_url, spotify_url, release_date] = row.split(',');
-                    return { title, artist, cover_url, spotify_url, release_date };
-                })
-                .filter(r => r.title && r.title !== 'title');
+            const res = await fetch(CSV_URL);
+            const csv = await res.text();
+            const rows = csv.split('\n').slice(1).filter(row => row.trim() !== '');
+            const releases = rows.map(row => {
+                const [title, artist, cover_url, spotify_url, release_date] = row.split(',');
+                return { title, artist, cover_url, spotify_url, release_date };
+            }).filter(r => r.title && r.title !== 'title');
 
-            const trackDiv = document.getElementById('releaseTrack');
-            if (releases.length === 0) {
-                trackDiv.innerHTML = '<div style="width:100%; text-align:center;">Нет релизов — добавь строки в таблицу.</div>';
-                return;
-            }
-
-            trackDiv.innerHTML = releases.map(r => `
-                <div class="release-card">
-                    <div class="card-cover">
-                        <img src="${r.cover_url || 'https://placehold.co/400x400/1e1e2a/7b6b9b?text=🎵'}" alt="cover">
-                    </div>
-                    <div class="card-info">
-                        <div class="card-artist">${escapeHtml(r.artist || 'RLXM')}</div>
-                        <div class="card-title">${escapeHtml(r.title)}</div>
-                        <div class="card-date">${r.release_date || ''}</div>
-                        <a href="${r.spotify_url || '#'}" target="_blank" class="card-link">Listen →</a>
-                    </div>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error('Ошибка загрузки релизов:', error);
-            document.getElementById('releaseTrack').innerHTML = '<div style="width:100%; text-align:center;">Не удалось загрузить релизы. Проверь ID таблицы и доступ.</div>';
+            return releases;
+        } catch (err) {
+            console.error(err);
+            return [];
         }
+    }
+
+    function renderLatest(releases) {
+        const latest = releases.sort((a,b) => new Date(b.release_date) - new Date(a.release_date))[0];
+        const container = document.getElementById('latestDropContainer');
+        if (!latest) {
+            container.innerHTML = `<div class="latest-label">LATEST DROP</div><div style="text-align:center;">Скоро...</div>`;
+            return;
+        }
+        container.innerHTML = `
+            <div class="latest-label">LATEST DROP</div>
+            <div class="latest-cover"><img src="${latest.cover_url || 'https://placehold.co/400x400/2a2a3a/8f7fbf?text=RLXM'}" alt="cover"></div>
+            <div class="latest-title">${escapeHtml(latest.title)}</div>
+            <a href="${latest.spotify_url || '#'}" target="_blank" class="listen-btn">LISTEN NOW →</a>
+        `;
+    }
+
+    function renderCarousel(releases) {
+        const track = document.getElementById('releaseTrack');
+        if (!releases.length) {
+            track.innerHTML = '<div style="width:100%; text-align:center;">Нет релизов — добавь строки в Google таблицу</div>';
+            return;
+        }
+        track.innerHTML = releases.map(r => `
+            <div class="release-card">
+                <div class="card-cover">
+                    <img src="${r.cover_url || 'https://placehold.co/400x400/1e1e2a/8e7cc3?text=🎵'}" alt="cover">
+                </div>
+                <div class="card-info">
+                    <div class="card-title">${escapeHtml(r.title)}</div>
+                    <a href="${r.spotify_url || '#'}" target="_blank" class="card-link">Listen →</a>
+                </div>
+            </div>
+        `).join('');
     }
 
     function escapeHtml(str) {
@@ -259,16 +368,18 @@
         });
     }
 
-    // карусель
-    const track = document.getElementById('releaseTrack');
-    document.getElementById('scrollLeft').addEventListener('click', () => {
-        track.scrollBy({ left: -260, behavior: 'smooth' });
-    });
-    document.getElementById('scrollRight').addEventListener('click', () => {
-        track.scrollBy({ left: 260, behavior: 'smooth' });
-    });
+    async function init() {
+        const releases = await fetchReleases();
+        renderLatest(releases);
+        renderCarousel(releases);
+    }
 
-    loadReleases();
+    init();
+
+    // карусель скролл
+    const trackDiv = document.getElementById('releaseTrack');
+    document.getElementById('scrollLeft').addEventListener('click', () => trackDiv.scrollBy({ left: -200, behavior: 'smooth' }));
+    document.getElementById('scrollRight').addEventListener('click', () => trackDiv.scrollBy({ left: 200, behavior: 'smooth' }));
 </script>
 </body>
 </html>
